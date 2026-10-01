@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Graduation Cap Top (Diamond) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,28L28,40L54,52L80,40Z" />
+    
+    <!-- Cap Under-band -->
+    <path
+        android:fillColor="#ECEFF1"
+        android:pathData="M37,45L37,56C37,63 44.6,67 54,67C63.4,67 71,63 71,56L71,45L54,53Z" />
+
+    <!-- Tassel hanging on left side -->
+    <path
+        android:fillColor="#FFD54F"
+        android:pathData="M54,40L30,44L28,57L31,57L33,45Z" />
+
+    <!-- Open Book base beneath -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M30,68C36,66 46,66 52,69L52,80C46,77 36,77 30,79ZM56,69C62,66 72,66 78,68L78,79C72,77 62,77 56,80Z" />
+
+    <!-- Medical / Health cross emblem in gold -->
+    <path
+        android:fillColor="#FFD54F"
+        android:pathData="M52.5,52H55.5V56.5H60V59.5H55.5V64H52.5V59.5H48V56.5H52.5Z" />
+</vector>

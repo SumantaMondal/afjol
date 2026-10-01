@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">WBTOPPER</string>
+    <string name="firestore_database_id">(default)</string>
+</resources>

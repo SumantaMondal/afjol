@@ -1,0 +1,120 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Student or Admin user profile in WBTOPPER",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "role": { "type": "string", "enum": ["STUDENT", "ADMIN"] },
+        "selectedCategoryId": { "type": "string" },
+        "isPremium": { "type": "boolean" },
+        "targetExamName": { "type": "string" }
+      },
+      "required": ["id", "name", "email", "role"]
+    },
+    "TestAttempt": {
+      "title": "TestAttempt",
+      "description": "Completed mock test attempt record and analytics",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "testId": { "type": "string" },
+        "testTitle": { "type": "string" },
+        "categoryId": { "type": "string" },
+        "timestamp": { "type": "number" },
+        "timeTakenSeconds": { "type": "number" },
+        "score": { "type": "number" },
+        "totalMarks": { "type": "number" },
+        "accuracyPercentage": { "type": "number" },
+        "correctCount": { "type": "number" },
+        "incorrectCount": { "type": "number" },
+        "unattemptedCount": { "type": "number" },
+        "rankEstimated": { "type": "number" },
+        "totalParticipants": { "type": "number" }
+      },
+      "required": ["id", "testId", "testTitle", "categoryId", "score", "totalMarks"]
+    },
+    "ExamCategory": {
+      "title": "ExamCategory",
+      "description": "Target exam category information",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "subtitle": { "type": "string" },
+        "bengaliTitle": { "type": "string" },
+        "bengaliSubtitle": { "type": "string" },
+        "iconKey": { "type": "string" },
+        "isActive": { "type": "boolean" },
+        "sortOrder": { "type": "number" }
+      },
+      "required": ["id", "title"]
+    },
+    "ExamAlert": {
+      "title": "ExamAlert",
+      "description": "Official examination alert announcement",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "titleBn": { "type": "string" },
+        "date": { "type": "string" },
+        "isBreaking": { "type": "boolean" },
+        "description": { "type": "string" }
+      },
+      "required": ["id", "title"]
+    },
+    "StudyResource": {
+      "title": "StudyResource",
+      "description": "Study PDFs, comprehensive revision articles, chapter notes, and previous year papers categorized by target exam",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "examId": { "type": "string" },
+        "examName": { "type": "string" },
+        "title": { "type": "string" },
+        "titleBn": { "type": "string" },
+        "subject": { "type": "string" },
+        "topic": { "type": "string" },
+        "resourceType": { "type": "string", "enum": ["PDF", "ARTICLE", "NOTES", "PYQ"] },
+        "contentMarkdown": { "type": "string" },
+        "pdfUrl": { "type": "string" },
+        "pageCount": { "type": "number" },
+        "fileSizeBytes": { "type": "number" },
+        "isPremium": { "type": "boolean" },
+        "language": { "type": "string" },
+        "author": { "type": "string" },
+        "description": { "type": "string" },
+        "viewCount": { "type": "number" },
+        "downloadCount": { "type": "number" }
+      },
+      "required": ["id", "examId", "title", "subject", "resourceType"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "User profile document owned by authenticated user"
+    },
+    "/users/{userId}/attempts/{attemptId}": {
+      "schema": { "$ref": "#/entities/TestAttempt" },
+      "description": "Test attempts made by the authenticated user"
+    },
+    "/exam_categories/{categoryId}": {
+      "schema": { "$ref": "#/entities/ExamCategory" },
+      "description": "Official exam categories readable by all"
+    },
+    "/announcements/{alertId}": {
+      "schema": { "$ref": "#/entities/ExamAlert" },
+      "description": "Official exam announcements and breaking notifications"
+    },
+    "/study_resources/{resourceId}": {
+      "schema": { "$ref": "#/entities/StudyResource" },
+      "description": "Study PDFs, educational articles, and subject notes for competitive exams"
+    }
+  }
+}

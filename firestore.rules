@@ -1,0 +1,43 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // User Profile Documents
+    match /users/{userId} {
+      allow read: if isAuthenticated();
+      allow write: if isOwner(userId);
+
+      // User Test Attempts Subcollection
+      match /attempts/{attemptId} {
+        allow read, write: if isOwner(userId);
+      }
+    }
+
+    // Exam Categories (Public read, authenticated admin write)
+    match /exam_categories/{categoryId} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+
+    // Announcements (Public read, authenticated admin write)
+    match /announcements/{alertId} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+
+    // Study PDFs & Article Resources (Public read, authenticated admin write)
+    match /study_resources/{resourceId} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+  }
+}
